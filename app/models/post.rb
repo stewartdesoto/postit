@@ -1,13 +1,11 @@
 class Post < ActiveRecord::Base
   
-  #include Votable
+  include Votable #module has 1:M, and instance methods
   
   belongs_to :creator, foreign_key: 'user_id', class_name: 'User'
   has_many :comments
   has_many :post_categories
   has_many :categories, through: :post_categories
-
-  has_many :votes, as: :votable
 
   before_save :generate_slug
 
@@ -17,27 +15,14 @@ class Post < ActiveRecord::Base
   validates :slug, presence: true, uniqueness: true
 
 
-    
-  def net_votes
-    up_votes - down_votes
-  end
-
   def to_param
     self.slug
   end
 
   private
 
-    def up_votes
-      self.votes.where(vote: true).count
-    end
-
-    def down_votes
-      self.votes.where(vote: false).count
-    end
-
     def generate_slug
-      temp_slug = self.title.gsub(/\W+/, '_').downcase
+      temp_slug = self.title.gsub(/\W+/, '-').downcase
       while(post = Post.find_by(slug: temp_slug)) 
         mat = /\d+\z/.match(temp_slug)
         if mat

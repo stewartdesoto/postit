@@ -4,6 +4,7 @@ module Votable
 
   included do
     has_many :votes, as: :votable
+    puts "in a concernt!!!!!!!!!!!!!!!!"
   end
 
   def net_votes
