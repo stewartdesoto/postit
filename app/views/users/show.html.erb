@@ -1,0 +1,17 @@
+<%= render 'shared/content_title', 
+  title: "Profile: #{@user.username}" %>
+<div class="well">
+  <p><b>Username:  </b><%= @user.username %></p>
+  <p><b>Time zone:</b></p>
+
+</div>
+
+<b><%= @user.username %>'s Activity
+<ul class="nav nav-tabs">
+  <li class="active">
+    <%= link_to "Posts (#{@user.posts.size})", user_path(@user) %>
+  </li>
+  <li>
+    <%= link_to "Comments (#{@user.comments.size})", user_path(@user) %>
+  </li>
+</ul>

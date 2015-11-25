@@ -1,0 +1,39 @@
+<div class="row">
+
+  <div class="col-sm-2 text-center">
+    <% if logged_in? %>
+      <%= link_to vote_post_path(post, like: true), 
+              method: :post, remote: true do %>
+        <i class="glyphicon glyphicon-arrow-up"></i>
+      <% end %>
+      <br/>
+      <span id='post_<%=post.slug%>_votes'><%= "#{post.net_votes} votes" %></span>
+      <br/>
+      <%= link_to vote_post_path(post, like: false),
+         method: :post, remote: true do %>
+        <i class="glyphicon glyphicon-arrow-down"></i>
+      <% end %>
+    <% end %>
+  </div>
+
+
+    <div class="well col-sm-8">
+      <%= render post.categories %>
+      <% if logged_in? && post.creator == current_user %>
+        <p class="pull-right"><%= link_to 'Edit Post', edit_post_path(post) %>
+        </p>
+      <% end %>
+      <p><b><h3><%= link_to post.title, fix_url(post.url) %></h3></b></p>
+      <p><%= post.description %></p>
+      <p><%= "Posted #{time_ago_in_words(post.created_at)} ago" %>
+        <%= " by #{post.creator.username}" if post.creator %>
+      </p>
+      <span>
+        <% if show_comments %>
+          <%= link_to("#{post.comments.size} comments", post_path(post)) %>
+        <% end %>
+      </span>
+    </div>
+  <div class="col-sm-2"></div>
+</div>
+

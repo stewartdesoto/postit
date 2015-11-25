@@ -1,0 +1,31 @@
+<h2>Comments</h2>
+
+  <% @post.reload.comments.each do |comment| %>
+  <div class="row">
+    
+    <div class="col-sm-2 text-center">
+      <% if logged_in? %>
+        <%= link_to vote_post_comment_path(comment.post, comment, like: true), 
+            method: :post, remote: true do %>
+          <i class="glyphicon glyphicon-arrow-up"></i>
+        <% end %>
+        <br/>
+        <div id='comment_vote_<%= comment.id %>'>
+          <%= "#{comment.net_votes}" %> votes
+        </div>
+        
+        <%= link_to vote_post_comment_path(comment.post, comment, like: false),
+            method: :post, remote: true do %>
+          <i class="glyphicon glyphicon-arrow-down"></i>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="well col-sm-8">
+        <em>"<%= comment.body %>"</em>
+        <%= link_to comment.user.username, user_path(comment.user) if comment.user %> at <%= comment.created_at %>
+    </div>
+
+  </div>
+
+    <% end %>

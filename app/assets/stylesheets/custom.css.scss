@@ -1,0 +1,32 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.container {
+  margin-left:135px;
+}
+
+.navbar .nav > li > a.brand {
+  padding-left:0px;
+}
+
+.quiet {
+  color:#ababab;
+}
+
+.nav_item {
+  margin-top: 25px;
+  margin-left:25px;
+  float:left;
+  color: #ff0000;
+}
+
+.label, .badge {
+  a, a:hover, a:focus {
+  color:#fff;
+  text-decoration:none;
+  }
+}
+
+div.comment_votes {
+  padding:10px;
+}

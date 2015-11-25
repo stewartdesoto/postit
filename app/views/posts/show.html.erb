@@ -1,0 +1,4 @@
+<%= render partial: 'posts/post', locals: {post: @post, show_comments: false} %>
+<%= render 'posts/comment_form' if logged_in? %>
+<%= render 'posts/comments' %>
+
